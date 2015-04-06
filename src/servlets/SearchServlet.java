@@ -114,7 +114,7 @@ public class SearchServlet extends HttpServlet
 
 		try
 		{
-			URL url = SearchServiceHelper.getSearchURL(_properties, searchString);
+			URL url = SearchServiceHelper.getSearchURL(_properties, URLEncoder.encode(searchString, java.nio.charset.StandardCharsets.UTF_8.toString()));
 			HttpsURLConnection connection = SearchServiceHelper.getHttpURLConnection(url, "GET", _properties.getProperty("SearchServiceApiKey"));
 
 			JsonReader jsonReader = Json.createReader(connection.getInputStream());
