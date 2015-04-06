@@ -18,7 +18,7 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class SearchServiceHelper
 {
-	private static final String _searchURL = "https://%s.search.windows.net/indexes/%s/docs?api-version=%s&search=%s";
+	private static final String _searchURL = "https://%s.search.windows.net/indexes/%s/docs?api-version=%s&search=%s&searchMode=all";
 	private static final String _createIndexURL = "https://%s.search.windows.net/indexes/%s?api-version=%s";
 	private static final String _createIndexerDatasourceURL = "https://%s.search.windows.net/datasources/%s?api-version=%s";
 	private static final String _createIndexerURL = "https://%s.search.windows.net/indexers/%s?api-version=%s";
