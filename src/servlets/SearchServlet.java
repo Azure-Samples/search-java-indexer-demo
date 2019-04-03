@@ -49,14 +49,14 @@ public class SearchServlet extends HttpServlet
 
 		try
 		{
-			// Create an index "features" in the given service
+			// Create an index "hotels" in the given service
 			if (!searchServiceClient.createIndex())
 			{
 				logMessage("Failed while creating index...");
 				return;
 			}
 
-			// Create indexer datasource "usgs-datasource"
+			// Create indexer datasource "hotels-datasource"
 			if (!searchServiceClient.createDatasource())
 			{
 				logMessage("Failed while creating indexer datasource...");
@@ -64,7 +64,7 @@ public class SearchServlet extends HttpServlet
 			}
 
 			// Create an indexer using the above datasource and targeting the
-			// above index "features"
+			// above index "hotels"
 			if (!searchServiceClient.createIndexer())
 			{
 				logMessage("Failed while creating indexer...");
@@ -151,41 +151,7 @@ public class SearchServlet extends HttpServlet
 		for (JsonValue jsonDoc : jsonArray)
 		{
 			JsonObject object = (JsonObject) jsonDoc;
-
-			Document document = new Document();
-			document.setFeatureName(object.getString("FEATURE_NAME"));
-			document.setFeatureClass(object.getString("FEATURE_CLASS"));
-			document.setStateAlpha(object.getString("STATE_ALPHA"));
-			document.setCountyName(object.getString("COUNTY_NAME"));
-			document.setElevationMeter(object.getInt("ELEV_IN_M"));
-			document.setElevationFt(object.getInt("ELEV_IN_FT"));
-			document.setMapName(object.getString("MAP_NAME"));
-			document.setDescription(object.getString("DESCRIPTION"));
-			document.setHistory(object.getString("HISTORY"));
-			JsonValue dateValue = object.get("DATE_CREATED");
-			document.setDateCreated(dateValue == JsonValue.NULL ? " " : dateValue.toString());
-			dateValue = object.get("DATE_EDITED");
-			document.setDateEdited(dateValue == JsonValue.NULL ? " " : dateValue.toString());
-
-			JsonValue location = object.get("LOCATION");
-
-			if (location != JsonValue.NULL)
-			{				
-				JsonArray coordinatesArray = ((JsonObject)location).getJsonArray("coordinates");
-
-				if (coordinatesArray != null && coordinatesArray.size() == 2)
-				{
-					JsonValue latitudeValue = coordinatesArray.get(0);
-					JsonValue longitudeValue = coordinatesArray.get(1);
-
-					String latitude = latitudeValue == null ? "" : latitudeValue.toString();
-					String longitude = longitudeValue == null ? "" : longitudeValue.toString();
-
-					document.setLatitude(latitude);
-					document.setLongitude(longitude);
-				}
-			}
-
+			Document document = Document.FromJsonObject(object);
 			result.add(document);
 		}
 
