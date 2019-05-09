@@ -12,7 +12,7 @@
 </head>
 <body>
 <body>
-	<h2>USGS Features Search for Washington State</h2>
+	<h2>Hotels Search</h2>
 	<form action="SearchServlet" method="POST">
 		<input type="text" name="SearchQuery" size="100" > 
 		<input type="submit" value="Search" />
@@ -26,37 +26,35 @@
 	<br/>
 	<table border="1">
 		<tr>
-			<td>Feature Name</td>
-			<td>Feature Class</td>
-			<td>State Alpha</td>
-			<td>County Name</td>
-			<td>Longitude</td>
-			<td>Latitude</td>
-			<td>Elevation (m))</td>
-			<td>Elevation (ft)</td>
-			<td>Map Name</td>
+			<td>Hotel Id</td>
+			<td>Hotel Name</td>
 			<td>Description</td>
-			<td>History</td>
-			<td>Date Created</td>
-			<td>Date Edited</td>
+			<td>Description (French)</td>
+			<td>Category</td>
+			<td>Tags</td>
+			<td>Parking Included?</td>
+			<td>Last Renovation Date</td>
+			<td>Rating</td>
+			<td>Address</td>
+			<td>Location</td>
+			<td>Number of Rooms</td>
 		</tr>
 		<%
 			for (int i = 0; i < DocList.size(); i++) {
 		%>
 		<tr>
-			<td><%=DocList.get(i).getFeatureName()%></td>
-			<td><%=DocList.get(i).getFeatureClass()%></td>
-			<td><%=DocList.get(i).getStateAlpha()%></td>
-			<td><%=DocList.get(i).getCountyName()%></td>
-			<td><%=DocList.get(i).getLatitude()%></td>
-			<td><%=DocList.get(i).getLongitude()%></td>
-			<td><%=DocList.get(i).getElevationMeter()%></td>
-			<td><%=DocList.get(i).getElevationFt()%></td>
-			<td><%=DocList.get(i).getMapName()%></td>
+			<td><%=DocList.get(i).getHotelId()%></td>
+			<td><%=DocList.get(i).getHotelName()%></td>
 			<td><%=DocList.get(i).getDescription()%></td>
-			<td><%=DocList.get(i).getHistory()%></td>
-			<td><%=DocList.get(i).getDateCreated()%></td>
-			<td><%=DocList.get(i).getDateEdited()%></td>
+			<td><%=DocList.get(i).getDescription_fr()%></td>
+			<td><%=DocList.get(i).getCategory()%></td>
+			<td><%=DocList.get(i).getTags()%></td>
+			<td><%=DocList.get(i).isParkingIncluded()%></td>
+			<td><%=DocList.get(i).getLastRenovationDate()%></td>
+			<td><%=DocList.get(i).getRating()%></td>
+			<td><%=DocList.get(i).getAddress().toString()%></td>
+			<td><%=DocList.get(i).getLocation().toString()%></td>
+			<td><%=DocList.get(i).getRooms().size()%></td>
 		</tr>
 		<%
 			}
